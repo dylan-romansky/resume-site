@@ -7,7 +7,7 @@ Kubernetes, and Terraform
 
 Finally the whole deployment process is set off every
 time I push new changes to the remote repo thanks to
-Jenkins
+Jenkins or Github Actions depending on which I settle on
 
 I will then be using tools such as Prometheus and
 Graphana to learn how to monitor the health of my
