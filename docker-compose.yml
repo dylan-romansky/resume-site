@@ -20,11 +20,12 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: res_it
     ports:
-      - '3308:3306'
+      - '3306:3306'
     volumes:
-      - ./db:/var/lib/mysql
+      - './db:/var/lib/mysql'
+      - './db_init:/docker-entrypoint-initdb.d/'
     networks:
-      - backend
+      - 'backend'
 
 networks:
   backend:

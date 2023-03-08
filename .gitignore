@@ -1,3 +1,4 @@
-tags
+tags*
 **/__pycache__
 setup
+db

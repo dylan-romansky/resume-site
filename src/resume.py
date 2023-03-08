@@ -1,24 +1,31 @@
 #!/usr/bin/env python3
 
-import sqlite3
 from flask import Flask, request, render_template, url_for, flash, redirect
 from werkzeug.exceptions import abort
+from flaskext.mysql import MySQL
+
+app = Flask(__name__)
+app.config['MYSQL_DATABASE_HOST'] = 'mysql-db'
+app.config['MYSQL_DATABASE_PORT'] = 3306
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE_DB'] = 'res_it'
+mysql = MySQL(app)
 
 def get_db_connection():
-	conn = sqlite3.connect('database.db')
-	conn.row_factory = sqlite3.Row
+	conn = mysql.connect()
 	return conn
 
 def get_item(id):
 	conn = get_db_connection()
-	item = conn.execute('SELECT * FROM res_it WHERE id = ?', (id,)).fetchone()
+	cur = conn.cursor()
+	cur.execute('SELECT * FROM res_it WHERE id = ?', (id,))
+	item = cur.fetchall()
+	cur.close()
 	conn.close()
 	if item is None:
 		abort(404)
 	return item
-
-app = Flask(__name__)
-app.config['SECRET KEY'] = 'yeah put some secret method here at some point'
 
 @app.route('/')
 def index():
@@ -27,9 +34,12 @@ def index():
 @app.route('/resume')
 def resume():
 	conn = get_db_connection()
-	edus = conn.execute("SELECT * FROM res_it WHERE type='edu'").fetchall()
-	jobs = conn.execute("SELECT * FROM res_it WHERE type='job'").fetchall()
-	conn.close()
+	cur = conn.cursor()
+	cur.execute("SELECT * FROM res_it WHERE type='edu'")
+	edus = cur.fetchall()
+	cur.execute("SELECT * FROM res_it WHERE type='job'")
+	jobs = cur.fetchall()
+	cur.close()
 	return render_template('resume.html', edus=edus, jobs=jobs)
 
 @app.route('/add_edu', methods=('GET', 'POST'))
@@ -44,9 +54,11 @@ def edu():
 			flash('name, and content required')
 		else:
 			conn = get_db_connection()
-			conn.execute('INSERT INTO res_it (name, start, end, content, type) VALUES (?, ?, ?, ?, ?)',
+			cur = conn.cursor()
+			cur.execute('INSERT INTO res_it (name, start, end, content, type) VALUES (?, ?, ?, ?, ?)',
 				(name, start, end, content, 'edu'))
 			conn.commit()
+			cur.close()
 			conn.close()
 			return redirect(url_for('resume'))
 	return render_template('edu.html')
@@ -64,9 +76,11 @@ def job():
 			flash('name, start, and end required')
 		else:
 			conn = get_db_connection()
-			conn.execute('INSERT INTO res_it (name, title, start, end, content, type) VALUES (?, ?, ?, ?, ?, ?)',
+			cur = conn.cursor()
+			cur.execute('INSERT INTO res_it (name, title, start, end, content, type) VALUES (?, ?, ?, ?, ?, ?)',
 				(name, title, start, end, content, 'job'))
 			conn.commit()
+			cur.close()
 			conn.close()
 			return redirect(url_for('resume'))
 	return render_template('job.html')
@@ -87,9 +101,11 @@ def edit(id):
 			flash('name, start, and end required')
 		else:
 			conn = get_db_connection()
-			conn.execute('UPDATE res_it SET name = ? , title = ?, start = ?, end = ?, content = ?'
+			cur = conn.cursor()
+			cur.execute('UPDATE res_it SET name = ? , title = ?, start = ?, end = ?, content = ?'
 							'WHERE id = ?', (name, title, start, end, content, id))
 			conn.commit()
-			conn.close()
+			cur.close()
+			conn.close
 			return redirect(url_for('resume'))
 	return render_template('edit.html', item=item)
