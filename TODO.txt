@@ -3,6 +3,7 @@ Develop frontend in Angular instead of using Flask for everything
 
 Move from sqlite to an actual separate SQL database
 -write a docker-compose.yml to make it all work together
+--look over the docker-compose documentation to find ways to hide secrets
 
 Convert from sql queries and response parsing to ORM
 
