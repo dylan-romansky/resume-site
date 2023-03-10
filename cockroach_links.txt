@@ -1,0 +1,32 @@
+certs:
+
+https://www.cockroachlabs.com/docs/v22.2/cockroach-cert?
+----read the security links at the bottom too
+
+transactions and related issues:
+
+https://www.cockroachlabs.com/docs/v22.2/transactions#syntax
+
+https://www.cockroachlabs.com/docs/v22.2/transactions
+
+https://www.cockroachlabs.com/docs/v22.2/performance-best-practices-overview#transaction-contention
+
+deployment:
+
+https://www.cockroachlabs.com/docs/v22.2/manual-deployment
+
+https://www.cockroachlabs.com/docs/v22.2/kubernetes-overview
+
+https://www.cockroachlabs.com/docs/v22.2/deploy-cockroachdb-on-premises
+
+https://www.cockroachlabs.com/docs/v22.2/deploy-cockroachdb-on-aws
+
+https://www.cockroachlabs.com/docs/v22.2/deploy-cockroachdb-on-google-cloud-platform
+
+https://www.cockroachlabs.com/docs/v22.2/cockroach-start#store
+
+recommendations:
+
+https://www.cockroachlabs.com/docs/v22.2/recommended-production-settings
+
+https://www.cockroachlabs.com/docs/v22.2/topology-patterns

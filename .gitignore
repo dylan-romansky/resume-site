@@ -3,5 +3,6 @@ tags*
 setup
 db
 old_cfg
+*.cfg
 secrets
 cockroach-data
