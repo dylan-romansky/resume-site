@@ -1,5 +1,1 @@
-Flask==2.2.3
-Flask_Bcrypt==1.0.1
-Werkzeug==2.2.3
-Flask-MySQL==1.5.2
-cryptography==39.0.1
+sqlalchemy-cockroachdb==2.0.0

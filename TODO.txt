@@ -1,11 +1,16 @@
 Develop frontend in Angular instead of using Flask for everything
 -Decide what other pages I might want as part of my site
 
-Move from MySQL to a more cluster cenetered db (CockroachDB)
+Rework file structure
+-split classes, config, backend into their own files
+
+Move from MySQL to a more cluster centered db (CockroachDB)
 -write a docker-compose.yml to make it all work together
 --look over the docker-compose documentation to find ways to hide secrets
+---Cockroach needs client/server keys to authenticate
 
 ---environment variables: "DATABASE_URL"
+---Flask can populate from files on your machine
 
 Convert from sql queries and response parsing to ORM
 -sqlalchemy and psycopg3

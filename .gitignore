@@ -2,3 +2,6 @@ tags*
 **/__pycache__
 setup
 db
+old_cfg
+secrets
+cockroach-data

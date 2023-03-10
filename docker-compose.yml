@@ -12,8 +12,8 @@ services:
     networks:
       - 'backend'
 
-  mysql-db:
-    container_name: mysql-db
+  cockroachdb:
+    container_name: cockroachdb
     image: cockroachdb/cockroach:v22.2.6
     restart: always
     environment:

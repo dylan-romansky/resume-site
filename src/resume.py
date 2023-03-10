@@ -1,50 +1,38 @@
 #!/usr/bin/env python3
 
+import uuid
+
 from flask import Flask, request, render_template, url_for, flash, redirect
-from werkzeug.exceptions import abort
-from flaskext.mysql import MySQL
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = "golly gee this key sure is secret"
-app.config['MYSQL_DATABASE_HOST'] = 'mysql-db'
-#app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_PORT'] = 3306
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-app.config['MYSQL_DATABASE_DB'] = 'res_it'
-mysql = MySQL(app)
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy_cockroachdb import run_transaction
 
-class _item:
-	id: int
-	name: str
-	title: str
-	start: str
-	end: str
-	content: str
-	type: str
-	def __init__(self, args):
-		self.id = args[0]
-		self.name = args[1]
-		self.title = args[2]
-		self.start = args[3]
-		self.end = args[4]
-		self.content = args[5]
-		self.type = args[6]
+from models import res_it
 
-def get_db_connection():
-	conn = mysql.connect()
-	return conn
+app = Flask(__name__.split('.')[0])
+app.config.from_pyfile('resume.cfg')
+engine = create_engine(app.config['SQL_ALCHEMY_DATABASE_URI'])
 
-def get_item(id: int):
-	conn = get_db_connection()
-	cur = conn.cursor()
-	cur.execute('SELECT * FROM res_it WHERE id = %s', (id,))
-	it = cur.fetchall()
-	cur.close()
-	conn.close()
-	if it is None:
-		abort(404)
-	return _item(it[0])
+def get_all(session, type):
+	return session.query(res_it).filter(res_it.type == type).all()
+
+def get_by_id(session, id):
+	return session.query(res_it).filter(res_it.id == id).one()
+
+def add_item(session, item):
+	session.add(item)
+
+def del_item(session, id):
+	session.delete(id)
+
+def update_item(session, id, fields):
+	item = session.query().filter(res_it.id == id).one()
+	item.name = fields['name']
+	item.title = fields['title']
+	item.start = fields['start']
+	item.end = fields['end']
+	item.content = fields['content']
 
 @app.route('/')
 def index():
@@ -52,17 +40,10 @@ def index():
 
 @app.route('/resume')
 def resume():
-	conn = get_db_connection()
-	cur = conn.cursor()
-	cur.execute("SELECT * FROM res_it WHERE type='edu'")
-	edus = []
-	for edu in cur.fetchall():
-		edus.append(_item(edu))
-	cur.execute("SELECT * FROM res_it WHERE type='job'")
-	jobs = []
-	for job in cur.fetchall():
-		jobs.append(_item(job))
-	cur.close()
+	edus = run_transaction(sessionmaker(bind=engine),
+				lambda session: get_all(session, 'edu'))
+	jobs = run_transaction(sessionmaker(bind=engine),
+				lambda session: get_all(session, 'job'))
 	print("edus = " + str(edus))
 	print("jobs = " + str(jobs))
 	return render_template('resume.html', edus=edus, jobs=jobs)
@@ -78,13 +59,11 @@ def edu():
 		if not name or not content:
 			flash('name, and content required')
 		else:
-			conn = get_db_connection()
-			cur = conn.cursor()
-			cur.execute('INSERT INTO res_it (name, start, end, content, type) VALUES (%s, %s, %s, %s, %s)',
-				(name, start, end, content, 'edu'))
-			conn.commit()
-			cur.close()
-			conn.close()
+			run_transaction(sessionmaker(bind=engine),
+					lambda session: add_item(session,
+						res_it(id=uuid.uuid4(), name=name,
+						start=start, end=end, content=content,
+						type='edu')))
 			return redirect(url_for('resume'))
 	return render_template('edu.html')
 
@@ -97,53 +76,33 @@ def job():
 		end = request.form['end']
 		content = request.form['content']
 
-		if not name or not start or not end:
-			flash('name, start, and end required')
+		if not name or not title or not start:
+			flash('name, title, and start required')
 		else:
-			conn = get_db_connection()
-			cur = conn.cursor()
-			cur.execute('INSERT INTO res_it (name, title, start, end, content, type)'
-							'VALUES (%s, %s, %s, %s, %s, %s)',
-							(name, title, start, end, content, 'job'))
-			conn.commit()
-			cur.close()
-			conn.close()
+			run_transaction(sessionmaker(bind=engine),
+					lambda session: add_item(session,
+						res_it(id=uuid.uuid4(), name=name,
+						title=title, start=start, end=end,
+						content=content, type='job')))
 			return redirect(url_for('resume'))
 	return render_template('job.html')
 
-@app.route('/<int:id>/edit', methods=('GET', 'POST'))
-def edit(id: int):
-	item = get_item(id)
-
+@app.route('/<id>/edit', methods=('GET', 'POST'))
+def edit(id):
+	item = res_it.query.filter(id=id)
 	if request.method == 'POST':
-		name = request.form['name']
-		title = request.form['title'] if request.form.get('title') else None
-		start = request.form['start']
-		end = request.form['end']
-		content = request.form['content']
-		if request.form['type'] == 'edu' and not name and not content:
+		if request.form['type'] == 'edu' and not request.form['name'] and not request.form['content']:
 			flash('name and description required')
-		elif request.form['type'] == 'job' and not name and not start and not end:
-			flash('name, start, and end required')
+		elif request.form['type'] == 'job' and not request.form['name'] and not request.form['title'] and not request.form['start']:
+			flash('name, title, and start required')
 		else:
-			conn = get_db_connection()
-			cur = conn.cursor()
-			cur.execute('UPDATE res_it SET name = %s , title = %s, start = %s, end = %s,'
-			   'content = %s WHERE id = %s', (name, title, start, end, content, id))
-			conn.commit()
-			cur.close()
-			conn.close
+			run_transaction(sessionmaker(bind=engine), lambda session: update_item(session, id, request.form))
 			return redirect(url_for('resume'))
 	return render_template('edit.html', item=item)
 
-@app.route('/<int:id>/delete', methods=('POST',))
-def delete(id: int):
-	item = get_item(id)
-	conn = get_db_connection()
-	cur = conn.cursor()
-	cur.execute('DELETE FROM res_it WHERE id = %s', (id))
-	cur.close()
-	conn.commit()
-	conn.close()
+@app.route('/<id>/delete', methods=('POST',))
+def delete(id):
+	item = run_transaction(sessionmaker(bind=engine), lambda session: get_by_id(session, id))
+	run_transaction(sessionmaker(bind=engine), lambda session: del_item(session, id))
 	flash('"{}" was successfully deleted!'.format(item.name))
 	return redirect(url_for('resume'))
