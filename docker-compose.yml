@@ -14,7 +14,7 @@ services:
 
   mysql-db:
     container_name: mysql-db
-    image: mysql:latest
+    image: cockroachdb/cockroach:v22.2.6
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
