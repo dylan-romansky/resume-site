@@ -14,7 +14,9 @@ app = Flask(__name__.split('.')[0])
 app.config.from_pyfile('resume.cfg')
 engine = create_engine(app.config['SQL_ALCHEMY_DATABASE_URI'].replace('postgresql://', 'cockroachdb://'))
 
-def get_all(session, type):
+def get_all(session, type=None):
+	if type == None:
+		return session.query(res_it).all()
 	return session.query(res_it).filter(res_it.type == type).all()
 
 def get_by_id(session, id):
@@ -30,8 +32,8 @@ def update_item(session, id, fields):
 	item = session.query().filter(res_it.id == id).one()
 	item.name = fields['name']
 	item.title = fields['title']
-	item.start = fields['start']
-	item.end = fields['end']
+	item.startdate = fields['startdate']
+	item.enddate = fields['enddate']
 	item.content = fields['content']
 
 @app.route('/')
@@ -40,10 +42,21 @@ def index():
 
 @app.route('/resume')
 def resume():
-	edus = run_transaction(sessionmaker(bind=engine),
-				lambda session: get_all(session, 'edu'))
-	jobs = run_transaction(sessionmaker(bind=engine),
-				lambda session: get_all(session, 'job'))
+	print("HEY ASSHOLE I'M RIGHT HERE")
+	jobs = []
+	edus = []
+	for item in run_transaction(sessionmaker(bind=engine),
+				lambda session: get_all(session)):
+		if item.type == 'job':
+			jobs.append(item)
+		else:
+			edus.append(item)
+#	edus = run_transaction(sessionmaker(bind=engine),
+#				lambda session: get_all(session, 'edu'))
+#	jobs = run_transaction(sessionmaker(bind=engine),
+#				lambda session: get_all(session, 'job'))
+	print(jobs[0].name)
+	print("YA GOT THAT?")
 	print("edus = " + str(edus))
 	print("jobs = " + str(jobs))
 	return render_template('resume.html', edus=edus, jobs=jobs)
@@ -52,8 +65,8 @@ def resume():
 def edu():
 	if request.method == 'POST':
 		name = request.form['name']
-		start = request.form['start']
-		end = request.form['end']
+		startdate = request.form['startdate']
+		enddate = request.form['enddate']
 		content = request.form['content']
 
 		if not name or not content:
@@ -62,7 +75,7 @@ def edu():
 			run_transaction(sessionmaker(bind=engine),
 					lambda session: add_item(session,
 						res_it(id=uuid.uuid4(), name=name,
-						start=start, end=end, content=content,
+						startdate=startdate, enddate=enddate, content=content,
 						type='edu')))
 			return redirect(url_for('resume'))
 	return render_template('edu.html')
@@ -72,17 +85,17 @@ def job():
 	if request.method == 'POST':
 		name = request.form['name']
 		title = request.form['title']
-		start = request.form['start']
-		end = request.form['end']
+		startdate = request.form['startdate']
+		enddate = request.form['enddate']
 		content = request.form['content']
 
-		if not name or not title or not start:
-			flash('name, title, and start required')
+		if not name or not title or not startdate:
+			flash('name, title, and start date required')
 		else:
 			run_transaction(sessionmaker(bind=engine),
 					lambda session: add_item(session,
 						res_it(id=uuid.uuid4(), name=name,
-						title=title, start=start, end=end,
+						title=title, startdate=startdate, enddate=enddate,
 						content=content, type='job')))
 			return redirect(url_for('resume'))
 	return render_template('job.html')
@@ -93,8 +106,8 @@ def edit(id):
 	if request.method == 'POST':
 		if request.form['type'] == 'edu' and not request.form['name'] and not request.form['content']:
 			flash('name and description required')
-		elif request.form['type'] == 'job' and not request.form['name'] and not request.form['title'] and not request.form['start']:
-			flash('name, title, and start required')
+		elif request.form['type'] == 'job' and not request.form['name'] and not request.form['title'] and not request.form['startdate']:
+			flash('name, title, and start date required')
 		else:
 			run_transaction(sessionmaker(bind=engine), lambda session: update_item(session, id, request.form))
 			return redirect(url_for('resume'))
