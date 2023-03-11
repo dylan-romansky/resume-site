@@ -12,7 +12,7 @@ from models import res_it
 
 app = Flask(__name__.split('.')[0])
 app.config.from_pyfile('resume.cfg')
-engine = create_engine(app.config['SQL_ALCHEMY_DATABASE_URI'])
+engine = create_engine(app.config['SQL_ALCHEMY_DATABASE_URI'].replace('postgresql://', 'cockroachdb://'))
 
 def get_all(session, type):
 	return session.query(res_it).filter(res_it.type == type).all()

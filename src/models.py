@@ -12,6 +12,6 @@ class res_it(Base):
 	name = Column(String)
 	title = Column(String)
 	start = Column(String)
-	end = Column(String)
+	finish = Column(String)
 	content = Column(String)
 	type = Column(String)

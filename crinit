@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#migrate to some other method of hiding the url
+cat ./db_init/schema.sql | cockroach sql --url "$(cut -d= -f2 ./src/resume.cfg)"

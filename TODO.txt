@@ -9,11 +9,9 @@ Move from MySQL to a more cluster centered db (CockroachDB)
 --look over the docker-compose documentation to find ways to hide secrets
 ---Cockroach needs client/server keys to authenticate
 
----environment variables: "DATABASE_URL"
----Flask can populate from files on your machine
-
 Convert from sql queries and response parsing to ORM
 -sqlalchemy and psycopg3
+--verify if postgresql-libs needs to be installed on python container
 
 look at loadbalancers
 

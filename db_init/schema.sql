@@ -1,11 +1,12 @@
 DROP TABLE IF EXISTS res_it;
 
 CREATE TABLE res_it (
-	id UUID PRIMARY KEY,
-	name TEXT NOT NULL,
-	title TEXT,
-	start TEXT,
-	end TEXT,
-	content TEXT,
-	type TEXT NOT NULL
-)
+
+    id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+	name STRING NOT NULL,
+	title STRING,
+	start STRING,
+	finish STRING,
+	content STRING,
+	type STRING NOT NULL
+);
