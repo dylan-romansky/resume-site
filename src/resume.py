@@ -26,10 +26,10 @@ def add_item(session, item):
 	session.add(item)
 
 def del_item(session, id):
-	session.delete(id)
+	session.query(res_it).filter(res_it.id == id).delete()
 
 def update_item(session, id, fields):
-	item = session.query().filter(res_it.id == id).one()
+	item = session.query(res_it).filter(res_it.id == id).one()
 	item.name = fields['name']
 	item.title = fields['title']
 	item.startdate = fields['startdate']
@@ -42,23 +42,15 @@ def index():
 
 @app.route('/resume')
 def resume():
-	print("HEY ASSHOLE I'M RIGHT HERE")
 	jobs = []
 	edus = []
-	for item in run_transaction(sessionmaker(bind=engine),
-				lambda session: get_all(session)):
+	session = sessionmaker(bind=engine)()
+	for item in get_all(session):
 		if item.type == 'job':
 			jobs.append(item)
 		else:
 			edus.append(item)
-#	edus = run_transaction(sessionmaker(bind=engine),
-#				lambda session: get_all(session, 'edu'))
-#	jobs = run_transaction(sessionmaker(bind=engine),
-#				lambda session: get_all(session, 'job'))
-	print(jobs[0].name)
-	print("YA GOT THAT?")
-	print("edus = " + str(edus))
-	print("jobs = " + str(jobs))
+	session.close()
 	return render_template('resume.html', edus=edus, jobs=jobs)
 
 @app.route('/add_edu', methods=('GET', 'POST'))
@@ -102,7 +94,9 @@ def job():
 
 @app.route('/<id>/edit', methods=('GET', 'POST'))
 def edit(id):
-	item = res_it.query.filter(id=id)
+	session = sessionmaker(bind=engine)()
+	item = get_by_id(session, id)
+	session.close()
 	if request.method == 'POST':
 		if request.form['type'] == 'edu' and not request.form['name'] and not request.form['content']:
 			flash('name and description required')
@@ -115,7 +109,8 @@ def edit(id):
 
 @app.route('/<id>/delete', methods=('POST',))
 def delete(id):
-	item = run_transaction(sessionmaker(bind=engine), lambda session: get_by_id(session, id))
+	session = sessionmaker(bind=engine)()
+	session.close()
+	print("OK BUT WE MADE IT HERE ALRIGHT JACKASS")
 	run_transaction(sessionmaker(bind=engine), lambda session: del_item(session, id))
-	flash('"{}" was successfully deleted!'.format(item.name))
 	return redirect(url_for('resume'))
