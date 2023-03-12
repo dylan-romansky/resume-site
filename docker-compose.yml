@@ -19,7 +19,7 @@ services:
     ports:
       - '8080:8080'
       - '26257:26257'
-    command: start --insecure
+    command: start --insecure --join cockroachdb
     volumes:
       - 'crdb1:/cockroach/cockroach-data'
     networks:
@@ -29,7 +29,7 @@ services:
     container_name: cockroachdb
     image: cockroachdb/cockroach:v22.2.6
     restart: always
-    command: start --insecure
+    command: start --insecure --join cockroachdb
     volumes:
       - 'crdb2:/cockroach/cockroach-data'
     networks:
@@ -39,7 +39,7 @@ services:
     container_name: cockroachdb
     image: cockroachdb/cockroach:v22.2.6
     restart: always
-    command: start --insecure
+    command: start --insecure --join cockroachdb
     volumes:
       - 'crdb3:/cockroach/cockroach-data'
     networks:
