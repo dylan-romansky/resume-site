@@ -111,6 +111,5 @@ def edit(id):
 def delete(id):
 	session = sessionmaker(bind=engine)()
 	session.close()
-	print("OK BUT WE MADE IT HERE ALRIGHT JACKASS")
 	run_transaction(sessionmaker(bind=engine), lambda session: del_item(session, id))
 	return redirect(url_for('resume'))
