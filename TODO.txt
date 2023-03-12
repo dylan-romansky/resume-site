@@ -1,5 +1,6 @@
 Develop frontend in Angular instead of using Flask for everything
 -Decide what other pages I might want as part of my site
+-https://auth0.com/blog/using-python-flask-and-angular-to-build-modern-apps-part-1/
 
 Rework file structure
 -split classes, config, backend into their own files

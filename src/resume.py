@@ -109,7 +109,5 @@ def edit(id):
 
 @app.route('/<id>/delete', methods=('POST',))
 def delete(id):
-	session = sessionmaker(bind=engine)()
-	session.close()
 	run_transaction(sessionmaker(bind=engine), lambda session: del_item(session, id))
 	return redirect(url_for('resume'))
