@@ -6,8 +6,10 @@ Rework file structure
 
 Move from MySQL to a more cluster centered db (CockroachDB)
 -write a docker-compose.yml to make it all work together
---look over the docker-compose documentation to find ways to hide secrets
----Cockroach needs client/server keys to authenticate
+-look over the docker-compose documentation to find ways to hide secrets
+--write all secrets in a file called .env and have it read from those
+-Cockroach needs client/server keys to authenticate when secure
+-have sqlalchemy handle database initialization as needed
 
 Convert from sql queries and response parsing to ORM
 -sqlalchemy and psycopg3

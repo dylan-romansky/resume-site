@@ -3,7 +3,7 @@ FROM python:latest
 WORKDIR /app
 
 COPY ./requirements.txt /app
-RUN pip install -r requirements.txt
+RUN apt-get update; apt-get upgrade -y; pip install --upgrade pip; pip install -r requirements.txt
 COPY . .
 EXPOSE 5000
 ENV FLASK_APP=resume.py

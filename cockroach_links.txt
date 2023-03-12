@@ -3,6 +3,10 @@ certs:
 https://www.cockroachlabs.com/docs/v22.2/cockroach-cert?
 ----read the security links at the bottom too
 
+connection parameters:
+
+https://www.cockroachlabs.com/docs/v22.2/connection-parameters
+
 transactions and related issues:
 
 https://www.cockroachlabs.com/docs/v22.2/transactions#syntax
@@ -15,7 +19,12 @@ deployment:
 
 https://www.cockroachlabs.com/docs/v22.2/manual-deployment
 
+https://www.cockroachlabs.com/docs/v22.2/start-a-local-cluster-in-docker-linux
+
 https://www.cockroachlabs.com/docs/v22.2/kubernetes-overview
+--orchestration
+
+https://www.cockroachlabs.com/docs/v22.2/deploy-cockroachdb-with-kubernetes-insecure
 
 https://www.cockroachlabs.com/docs/v22.2/deploy-cockroachdb-on-premises
 

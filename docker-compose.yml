@@ -16,14 +16,32 @@ services:
     container_name: cockroachdb
     image: cockroachdb/cockroach:v22.2.6
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: res_it
     ports:
-      - '3306:3306'
+      - '8080:8080'
+      - '26257:26257'
+    command: start --insecure
     volumes:
-      - './db:/var/lib/mysql'
-      - './db_init:/docker-entrypoint-initdb.d/'
+      - 'crdb1:/cockroach/cockroach-data'
+    networks:
+      - 'backend'
+
+  cockroachdb:
+    container_name: cockroachdb
+    image: cockroachdb/cockroach:v22.2.6
+    restart: always
+    command: start --insecure
+    volumes:
+      - 'crdb2:/cockroach/cockroach-data'
+    networks:
+      - 'backend'
+
+  cockroachdb:
+    container_name: cockroachdb
+    image: cockroachdb/cockroach:v22.2.6
+    restart: always
+    command: start --insecure
+    volumes:
+      - 'crdb3:/cockroach/cockroach-data'
     networks:
       - 'backend'
 
@@ -32,4 +50,6 @@ networks:
 
 volumes:
   src:
-  db:
+  crdb1:
+  crdb2:
+  crdb3:
