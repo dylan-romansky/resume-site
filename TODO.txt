@@ -10,6 +10,9 @@ Switch to a production-grade wsgi server for Flask
 Rework file structure
 -split classes, config, backend into their own files
 
+Switch to pipenv for dependency management
+-https://pipenv.pypa.io/en/latest/
+
 Automate cockroachdb initialization
 -Cockroach needs client/server keys to authenticate when secure
 -Check how cockroach uses the --join flag
