@@ -10,9 +10,18 @@ Automate cockroachdb initialization
 
 Write all secrets in a file called .env and have it read from those
 
-look at loadbalancers
 
 Migrate from docker-compose.yml to kubernetes manifest
+-Look at load balancers
+--Due to its order of operations, the PostgreSQL wire protocol's
+  implementation of TLS is not compatible with SNI-based routing
+  in the Kubernetes ingress controller. Instead, use a TCP load
+  balancer for CockroachDB that is not shared with other services.
+-Due to cockroachdb's tendency to kill nodes that are out of sync
+ by 500ms+, sync all nodes to time.google.com
+-Do I need to attach a cockroachdb instance to every instance of
+ my frontend or is it enough to have a set of cockroachdb pods
+ and point my backend pods to the cockroachdb pods
 
 Integrate into Terraform for scaling purposes
 
