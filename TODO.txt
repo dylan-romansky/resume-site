@@ -7,6 +7,9 @@ Switch to a production-grade wsgi server for Flask
 -https://gabimelo.medium.com/developing-a-flask-api-in-a-docker-container-with-uwsgi-and-nginx-e089e43ed90e
 -https://www.fullstackpython.com/wsgi-servers.html
 
+Look at app-swapping with NGINX
+-https://uwsgi-docs.readthedocs.io/en/latest/Nginx.html
+
 Rework file structure
 -split classes, config, backend into their own files
 
