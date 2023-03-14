@@ -13,8 +13,6 @@ from models import res_it
 app = Flask(__name__.split('.')[0])
 app.config.from_pyfile('resume.cfg')
 engine = create_engine(app.config['SQL_ALCHEMY_DATABASE_URI'].replace('postgresql://', 'cockroachdb://'))
-db = SQLAlchemy(app)
-db.create_all()
 
 def get_all(session, type=None):
 	if type == None:

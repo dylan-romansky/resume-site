@@ -13,9 +13,11 @@ services:
       - 'backend'
 
   cockroachdb:
-    container_name: cockroachdb1
-    image: cockroachdb/cockroach:v22.2.6
+    container_name: cockroachdb
+#    image: cockroachdb/cockroach:v22.2.6
+    build: db_init
     restart: always
+    command: start --insecure --join cockroachdb
     ports:
       - '5010:8080'
       - '26257:26257'
@@ -24,25 +26,25 @@ services:
     networks:
       - 'backend'
 
-  cockroachdb:
-    container_name: cockroachdb2
-    image: cockroachdb/cockroach:v22.2.6
-    restart: always
-    command: start --insecure --join cockroachdb
-    volumes:
-      - 'crdb2:/cockroach/cockroach-data'
-    networks:
-      - 'backend'
+#   cockroachdb:
+#    container_name: cockroachdb2
+#    image: cockroachdb/cockroach:v22.2.6
+#    restart: always
+#    command: start --insecure --join cockroachdb
+#    volumes:
+#      - 'crdb2:/cockroach/cockroach-data'
+#    networks:
+#      - 'backend'
 
-  cockroachdb:
-    container_name: cockroachdb3
-    image: cockroachdb/cockroach:v22.2.6
-    restart: always
-    command: start --insecure --join cockroachdb
-    volumes:
-      - 'crdb3:/cockroach/cockroach-data'
-    networks:
-      - 'backend'
+#  cockroachdb:
+#    container_name: cockroachdb3
+#    image: cockroachdb/cockroach:v22.2.6
+#    restart: always
+#    command: start --insecure --join cockroachdb
+#    volumes:
+#      - 'crdb3:/cockroach/cockroach-data'
+#    networks:
+#      - 'backend'
 
 networks:
   backend:
