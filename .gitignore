@@ -6,3 +6,7 @@ old_cfg
 *.cfg
 secrets
 cockroach-data
+old_db_init
+serv_config_old
+supervisord.pid
+supervisord.log

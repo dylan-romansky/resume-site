@@ -13,6 +13,8 @@ from models import res_it
 app = Flask(__name__.split('.')[0])
 app.config.from_pyfile('resume.cfg')
 engine = create_engine(app.config['SQL_ALCHEMY_DATABASE_URI'].replace('postgresql://', 'cockroachdb://'))
+db = SQLAlchemy(app)
+db.create_all()
 
 def get_all(session, type=None):
 	if type == None:
@@ -111,3 +113,6 @@ def edit(id):
 def delete(id):
 	run_transaction(sessionmaker(bind=engine), lambda session: del_item(session, id))
 	return redirect(url_for('resume'))
+
+#if __name__ == '__main__':
+#	app.run()

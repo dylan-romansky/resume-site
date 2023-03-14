@@ -6,27 +6,26 @@ services:
     build: src
     restart: always
     ports:
-      - '5000:5000'
+      - '5000:80'
     volumes:
       - './src:/app'
     networks:
       - 'backend'
 
   cockroachdb:
-    container_name: cockroachdb
+    container_name: cockroachdb1
     image: cockroachdb/cockroach:v22.2.6
     restart: always
     ports:
-      - '8080:8080'
+      - '5010:8080'
       - '26257:26257'
-    command: start --insecure --join cockroachdb
     volumes:
       - 'crdb1:/cockroach/cockroach-data'
     networks:
       - 'backend'
 
   cockroachdb:
-    container_name: cockroachdb
+    container_name: cockroachdb2
     image: cockroachdb/cockroach:v22.2.6
     restart: always
     command: start --insecure --join cockroachdb
@@ -36,7 +35,7 @@ services:
       - 'backend'
 
   cockroachdb:
-    container_name: cockroachdb
+    container_name: cockroachdb3
     image: cockroachdb/cockroach:v22.2.6
     restart: always
     command: start --insecure --join cockroachdb
