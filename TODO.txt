@@ -2,24 +2,7 @@ Develop frontend in Angular instead of using Flask for everything
 -Decide what other pages I might want as part of my site
 -https://auth0.com/blog/using-python-flask-and-angular-to-build-modern-apps-part-1/
 -https://getbootstrap.com/
-
-Switch to a production-grade wsgi server for Flask
--https://gabimelo.medium.com/developing-a-flask-api-in-a-docker-container-with-uwsgi-and-nginx-e089e43ed90e
--https://www.fullstackpython.com/wsgi-servers.html
-
-Look at uwsgi app configuration
--magic variables: https://uwsgi-docs.readthedocs.io/en/latest/Configuration.html
-
-Possibly consider a different server for deployment to clusters
--https://github.com/tiangolo/uwsgi-nginx-flask-docker
-
-Look at app-swapping with NGINX
--https://uwsgi-docs.readthedocs.io/en/latest/Nginx.html
-
-Rework file structure
--split classes, config, backend into their own files
-
-Make the Dockerfile not hideous
+-Migrate from strings to dates for start and end dates
 
 Switch to pipenv for dependency management
 -https://pipenv.pypa.io/en/latest/
@@ -29,8 +12,9 @@ Automate cockroachdb initialization
 -Check how cockroach uses the --join flag
 -See if sqlalchemy can handle table creation as needed
 --https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_core_creating_table.htm
+-See if cockroachdb wants to be single-node if I'm containerizing everything
 
-Write all secrets in a file called .env and have it read from those
+Write all secrets in a file called .env and have it read from those ?
 
 Migrate from docker-compose.yml to kubernetes manifest
 -Look at load balancers
@@ -58,3 +42,14 @@ possible misc links:
 https://pythonhosted.org/Flask-Mail/
 
 https://flask-login.readthedocs.io/en/latest/
+
+Rework file structure
+-split classes, config, backend into their own files
+
+Make the Dockerfile not hideous
+
+Possibly consider a different server for deployment to clusters
+-https://github.com/tiangolo/uwsgi-nginx-flask-docker
+
+Look at app-swapping with NGINX
+-https://uwsgi-docs.readthedocs.io/en/latest/Nginx.html

@@ -1,4 +1,5 @@
 #!/bin/bash
 
-#migrate to some other method of hiding the url
-cat ./db_init/schema.sql | cockroach sql --url "$(cut -d= -f2,3 ./src/resume.cfg | sed "s/^\(\"\)\(.*\)\1\$/\2/g")"
+#migrate to some other method of db initialization
+
+sudo docker exec "$(docker container ls | grep cockroach | awk '{print $1}' | cut -d: -f2)" bash -c "cockroach init --insecure; cockroach sql --insecure < /docker-entrypoint-initdb.d/schema.sql"
