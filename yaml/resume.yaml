@@ -26,10 +26,12 @@ kind: Service
 metadata:
   name: resume-service
 spec:
-  type: LoadBalancer
+#  type: NodePort
+  type: LoadBalancer #Not on Minikube?
   selector:
-    app: resume-service
+    app: resume-backend
   ports:
   - protocol: TCP
+    nodePort: 30080
     port: 80
     targetPort: 80
