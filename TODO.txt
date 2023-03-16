@@ -8,11 +8,9 @@ Switch to pipenv for dependency management
 -https://pipenv.pypa.io/en/latest/
 
 Automate cockroachdb initialization
--Cockroach needs client/server keys to authenticate when secure
 -Check how cockroach uses the --join flag
 -See if sqlalchemy can handle table creation as needed
 --https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_core_creating_table.htm
--See if cockroachdb wants to be single-node if I'm containerizing everything
 
 Write all secrets in a file called .env and have it read from those ?
 
@@ -28,6 +26,7 @@ Migrate from docker-compose.yml to kubernetes manifest
  my frontend or is it enough to have a set of cockroachdb pods
  and point my backend pods to the cockroachdb pods
 -https://docs.docker.com/get-started/kube-deploy/
+-https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ingress-guide-nginx-example.html
 
 Integrate into Terraform for scaling purposes
 
