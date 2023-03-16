@@ -18,8 +18,11 @@ COPY serv_config/flask-nginx.conf /etc/nginx/conf.d/
 COPY serv_config/uwsgi.ini /etc/uwsgi/
 COPY serv_config/supervisord.conf /etc/
 COPY resume.py .
+COPY resume.cfg .
 COPY models.py .
-COPY static .
-COPY templates .
+COPY static ./static
+COPY templates/ ./templates
 COPY __init__.py .
 CMD supervisord
+
+EXPOSE 80
