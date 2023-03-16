@@ -2,4 +2,4 @@
 
 #migrate to some other method of db initialization
 
-sudo docker exec "$(docker container ls | grep cockroach | awk '{print $1}' | cut -d: -f2)" bash -c "cockroach init --insecure; cockroach sql --insecure < /docker-entrypoint-initdb.d/schema.sql"
+kubectl exec cockroachdb-0  -- /cockroach/cockroach init --certs-dir='/cockroach/cockroach-certs'; /cockroach/cockroach sql --certs-dir='/cockroach/cockroach-certs' < /docker-entrypoint-initdb.d/schema.sql

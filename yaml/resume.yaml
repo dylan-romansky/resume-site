@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-backend
+  labels:
+    app: resume-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume-backend
+  template:
+    metadata:
+      labels:
+        app: resume-backend
+    spec:
+      containers:
+      - name: resume-backend
+        image: resume
+        imagePullPolicy: IfNotPresent #change to Always when online
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resume-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: resume-service
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000

@@ -3,6 +3,9 @@ FROM python:latest
 WORKDIR /app
 
 COPY requirements.txt .
+COPY secrets/certs/ca.crt /certs/ca.crt
+COPY secrets/certs/client.root.crt /certs/client.root.crt
+COPY secrets/certs/client.root.key /certs/client.root.key
 RUN apt-get update; apt-get upgrade -y; \
 	apt-get install -y nginx supervisor; \
 	pip install --upgrade pip; \
