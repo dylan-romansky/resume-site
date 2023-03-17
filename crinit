@@ -1,7 +1,0 @@
-#!/bin/bash
-
-#migrate to some other method of db initialization
-
-DB_INIT="$(cat db_init/schema.sql)"
-kubectl exec cockroachdb-0  -- /cockroach/cockroach init --certs-dir='/cockroach/cockroach-certs'
-kubectl exec cockroachdb-0  -- /cockroach/cockroach sql --certs-dir='/cockroach/cockroach-certs' -e "$DB_INIT"
