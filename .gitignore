@@ -11,3 +11,4 @@ old_scripts
 serv_config_old
 supervisord.pid
 supervisord.log
+docker-compose.yml
