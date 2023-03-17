@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# This script serves as a means of deploying and initializing
+# the entire application so I don't have to go through this
+# process every time
+
 SECRETS='src/secrets'
 minikube delete
 minikube start

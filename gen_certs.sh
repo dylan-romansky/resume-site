@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# A one-time use script to generate the secrets
+# get used in the actual app deployment process
+
 SECRETS="src/secrets"
 
 if [ -d "$SECRETS" ]; then
