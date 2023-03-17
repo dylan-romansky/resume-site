@@ -10,9 +10,11 @@ Soon the frontend will be redone in Angular
 
 After that a Terraform configuration will be made
 
-Then finally the whole deployment process will be set
-off every time I push new changes to the remote repo
-thanks to Jenkins
+The entire thing will be deployed to a cloud provider
+
+Then finally a CI/CD pipeline will be put into place so
+that any time I push an update from here, it gets deployed
+simultaneously to the cloud provider I end up choosing
 
 I will then be using tools such as Prometheus and
 Graphana to learn how to monitor the health of my
