@@ -3,7 +3,7 @@
 # A one-time use script to generate the secrets
 # get used in the actual app deployment process
 
-SECRETS="src/secrets"
+SECRETS="backend/secrets"
 
 if [ -d "$SECRETS" ]; then
 	rm -rf "$SECRETS"

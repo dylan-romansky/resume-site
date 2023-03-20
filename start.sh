@@ -4,14 +4,14 @@
 # the entire application so I don't have to go through this
 # process every time
 
-SECRETS='src/secrets'
+SECRETS='backend/secrets'
 minikube delete
 minikube start
 minikube addons enable ingress
 
 eval $(minikube -p minikube docker-env)
 
-cd src
+cd backend
 docker rmi -f "$(docker image ls | grep resume | cut -d: -f2)"
 docker build --no-cache -t resume .
 cd ..

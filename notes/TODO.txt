@@ -3,6 +3,7 @@ Develop frontend in Angular instead of using Flask for everything
 -https://auth0.com/blog/using-python-flask-and-angular-to-build-modern-apps-part-1/
 -https://getbootstrap.com/
 -Migrate from strings to dates for start and end dates
+-Use route guards to protect admin panel
 
 Switch to pipenv for dependency management
 -https://pipenv.pypa.io/en/latest/
