@@ -1,0 +1,5 @@
+<div *ngIf="item">
+	<p>{{item.name}}</p>
+	<p *ngIf="item.type == 'job'">{{item.title}}</p>
+	<span>Start: {{item.startdate}} - End: {{item.enddate}}</span>
+</div>

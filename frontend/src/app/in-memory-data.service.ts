@@ -7,17 +7,15 @@ import { ResIt } from './res-it';
 })
 export class InMemoryDataService implements InMemoryDbService {
 	createDb() {
-		const resIts = [
-			{id: '1', name: 'test1',
-				title: 'test', startdate: "6/7/2022",
-				enddate: '6/7/2069', content: 'test',
-				type: 'job'},
+		const resume: ResIt[] = [
+			{id: '1', name: 'test1', title: 'test',
+				startdate: "6/7/2022", enddate: '6/7/2069',
+				content: 'test', type: 'job'},
 			{id: '2', name: 'test2', title: '',
 				startdate: '6/7/2018', enddate: '6/7/2020',
-				content: 'test',
-				type: 'edu'}
+				content: 'test', type: 'edu'}
 		];
-		return {resIts};
+		return {resume};
 	}
 
 	genID(resIts: ResIt[]) {

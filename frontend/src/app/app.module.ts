@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { ResumeComponent } from './resume/resume.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { InMemoryDataService } from './in-memory-data.service';
+import { ItemComponent } from './item/item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ResumeComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,

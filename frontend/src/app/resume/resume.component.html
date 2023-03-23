@@ -1,15 +1,21 @@
-<div *ngIf="jobs.length || edus.length; else noJobs">
-	<ul *ngIf="jobs">
-		<li *ngFor="let job of jobs">
-			{{job.name}}
-		</li>
-	</ul>
-	<ul *ngIf="edus">
-		<li *ngFor="let job of jobs">
-			{{job.name}}
-		</li>
-	</ul>
-</div>
-<ng-template #noJobs>
+<ng-container *ngIf="!jobs.length && !edus.length; else items">
 	<p>This is where resume items will go as I finish setting up a live production database</p>
+</ng-container>
+<ng-template #items>
+	<div *ngIf="jobs.length">
+		<p>Work History</p>
+		<ul>
+			<li *ngFor="let job of jobs">
+				<app-item [item]="job"></app-item>
+			</li>
+		</ul>
+	</div>
+	<div *ngIf="edus.length">
+		<p>Education</p>
+		<ul>
+			<li *ngFor="let edu of edus">
+				<app-item [item]="edu"></app-item>
+			</li>
+		</ul>
+	</div>
 </ng-template>
