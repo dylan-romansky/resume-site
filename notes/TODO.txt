@@ -3,6 +3,7 @@ Develop frontend in Angular instead of using Flask for everything
 -https://auth0.com/blog/using-python-flask-and-angular-to-build-modern-apps-part-1/
 -https://getbootstrap.com/
 -Migrate from strings to dates for start and end dates
+--sqlalchemy supports this
 -Use route guards to protect admin panel
 
 Switch to pipenv for dependency management
@@ -12,6 +13,7 @@ Automate cockroachdb initialization
 -Check how cockroach uses the --join flag
 -See if sqlalchemy can handle table creation as needed
 --https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_core_creating_table.htm
+-https://auth0.com/blog/sqlalchemy-orm-tutorial-for-python-developers/
 
 Write all secrets in a file called .env and have it read from those ?
 

@@ -1,0 +1,23 @@
+<h2>Resume item entry</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	<div>
+		<input type="radio" name="type" id="edu" value="edu">
+		<label for="edu">Education</label>
+		<input type="radio" name="type" id="job" value="job">
+		<label for="job">Work History</label>
+	</div>
+	<label for="name">Name</label>
+	<input type="text" id="name">
+	<ng-container *ngIf="form.type == 'job'">
+	<label for="title">Job Title</label>
+	<input type="text" id="title">
+	</ng-container>
+	<label for="startdate">Start Date</label>
+	<input type="text" id="startdate">
+	<label for="enddate">End Date</label>
+	<input type="text" id="enddate">
+	<label for="content">Content</label>
+	<input type="text" id="content">
+	<button type="submit">Submit</button>
+</form>

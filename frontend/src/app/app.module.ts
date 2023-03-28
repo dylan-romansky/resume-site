@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
@@ -11,6 +11,7 @@ import { ResumeComponent } from './resume/resume.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { InMemoryDataService } from './in-memory-data.service';
 import { ItemComponent } from './item/item.component';
+import { EntryComponent } from './entry/entry.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +19,16 @@ import { ItemComponent } from './item/item.component';
     HomeComponent,
     ResumeComponent,
     AboutMeComponent,
-    ItemComponent
+    ItemComponent,
+    EntryComponent
   ],
   imports: [
     BrowserModule,
-	FormsModule,
+	ReactiveFormsModule,
     AppRoutingModule,
 	HttpClientModule,
 
+	//For testing while developing the frontend. Remove when done
 	HttpClientInMemoryWebApiModule.forRoot(
 		InMemoryDataService, {dataEncapsulation: false})
   ],
