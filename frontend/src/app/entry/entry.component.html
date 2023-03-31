@@ -2,22 +2,25 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 	<div>
-		<input type="radio" name="type" id="edu" value="edu">
+		<input type="radio" name="type" id="edu" value="edu" formControlName="type">
 		<label for="edu">Education</label>
-		<input type="radio" name="type" id="job" value="job">
+		<input type="radio" name="type" id="job" value="job" formControlName="type">
 		<label for="job">Work History</label>
 	</div>
 	<label for="name">Name</label>
-	<input type="text" id="name">
+	<input type="text" id="name" formControlName="name">
 	<ng-container *ngIf="form.type == 'job'">
 	<label for="title">Job Title</label>
-	<input type="text" id="title">
+	<input type="text" id="title" formControlName="title">
 	</ng-container>
 	<label for="startdate">Start Date</label>
-	<input type="text" id="startdate">
+	<input type="text" id="startdate" formControlName="startdate">
 	<label for="enddate">End Date</label>
-	<input type="text" id="enddate">
+	<input type="text" id="enddate" formControlName="enddate">
 	<label for="content">Content</label>
-	<input type="text" id="content">
-	<button type="submit">Submit</button>
+	<input type="text" id="content" formControlName="content">
+	<button type="submit" [disabled]="!form.valid">Submit</button>
+
+	<br/><br/>
+	Value: {{ form.value | json }}
 </form>

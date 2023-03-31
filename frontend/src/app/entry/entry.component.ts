@@ -11,15 +11,16 @@ export class EntryComponent {
 
 	constructor(private fb: FormBuilder) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.form = this.fb.group({
-			"name": ["", Validators.required],
-			"type": ["", Validators.required],
-			"title": [""],
-			"startdate": ["", Validators.required],
-			"enddate": [""],
-			"content": ["", Validators.required]
+			name: ["", Validators.required],
+			type: ["", Validators.required],
+			title: [""],
+			startdate: ["", Validators.required],
+			enddate: [""],
+			content: ["", Validators.required]
 		});
+		this.form.valueChanges.subscribe(console.log);
 	}
 
 	onSubmit() {
