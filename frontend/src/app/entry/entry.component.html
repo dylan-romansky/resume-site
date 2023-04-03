@@ -1,7 +1,7 @@
 <h2>Resume item entry</h2>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-	<div>
+	<div (change)="selectType($event)">
 		<input type="radio" name="type" id="edu" value="edu" formControlName="type">
 		<label for="edu">Education</label>
 		<input type="radio" name="type" id="job" value="job" formControlName="type">
@@ -9,7 +9,7 @@
 	</div>
 	<label for="name">Name</label>
 	<input type="text" id="name" formControlName="name">
-	<ng-container *ngIf="form.type == 'job'">
+	<ng-container *ngIf="isJob">
 	<label for="title">Job Title</label>
 	<input type="text" id="title" formControlName="title">
 	</ng-container>

@@ -1,7 +1,0 @@
-https://stackoverflow.com/questions/48151202/angular-formgroupname-value-change-does-not-update-the-form
-https://www.google.com/search?q=angular+reactive+form+not+updating+value&oq=angular+reactive+form+not+&aqs=chrome.0.0i512j69i57j0i22i30l8.5524j0j4&sourceid=chrome&ie=UTF-8
-https://www.digitalocean.com/community/tutorials/angular-reactive-forms-valuechanges
-https://stackoverflow.com/questions/51342775/how-can-i-bind-a-form-to-a-model-in-angular-6-using-reactive-forms
-https://stackoverflow.com/questions/40458739/two-way-binding-in-reactive-forms
-https://blog.angular-university.io/angular-custom-form-controls/
-https://blog.angular-university.io/angular-custom-validators/

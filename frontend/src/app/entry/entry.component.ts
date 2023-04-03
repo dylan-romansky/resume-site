@@ -8,6 +8,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class EntryComponent {
 	form: any;
+	isJob: boolean = false;
 
 	constructor(private fb: FormBuilder) {}
 
@@ -25,5 +26,12 @@ export class EntryComponent {
 
 	onSubmit() {
 		console.log(this.form);
+	}
+
+	selectType(event: any) {
+		if (event.target.value == "job")
+			this.isJob = true;
+		else
+			this.isJob = false;
 	}
 }
