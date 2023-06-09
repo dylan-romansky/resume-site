@@ -23,6 +23,7 @@ COPY models.py .
 COPY static ./static
 COPY templates/ ./templates
 COPY __init__.py .
+RUN chown root:nginx /certs/*; chmod 640 /certs/client.root.key
 CMD supervisord
 
 EXPOSE 80

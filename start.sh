@@ -11,6 +11,10 @@ minikube addons enable ingress
 
 eval $(minikube -p minikube docker-env)
 
+echo "removing old certs"
+rm -rf $SECRETS
+echo "generating new certs"
+./gen_certs.sh
 cd backend
 docker rmi -f "$(docker image ls | grep resume | cut -d: -f2)"
 docker build --no-cache -t resume .
