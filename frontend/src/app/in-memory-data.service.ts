@@ -8,10 +8,10 @@ import { ResIt } from './res-it';
 export class InMemoryDataService implements InMemoryDbService {
 	createDb() {
 		const resume: ResIt[] = [
-			{id: '1', name: 'test1', title: 'test',
+			{id: 1, name: 'test1', title: 'test',
 				startdate: "6/7/2022", enddate: '6/7/2069',
 				content: 'test', type: 'job'},
-			{id: '2', name: 'test2', title: '',
+			{id: 2, name: 'test2', title: '',
 				startdate: '6/7/2018', enddate: '6/7/2020',
 				content: 'test', type: 'edu'}
 		];
@@ -19,6 +19,7 @@ export class InMemoryDataService implements InMemoryDbService {
 	}
 
 	genID(resIts: ResIt[]) {
-		return (resIts.length > 0 ? Math.max(...resIts.map(resIt => parseInt(resIt.id))) + 1 : 1).toString();
+		console.log("is this even doing anything");
+		return (resIts.length > 0 ? Math.max(...resIts.map(resIt => resIt.id)) + 1 : 1);
 	}
 }

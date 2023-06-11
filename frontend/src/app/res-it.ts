@@ -1,5 +1,5 @@
 export interface ResIt {
-	id: string; //uuids get stored as strings?
+	id: number; //change to uuid later. uuids get stored as strings?
 	name: string;
 	title: string;
 	startdate: string;

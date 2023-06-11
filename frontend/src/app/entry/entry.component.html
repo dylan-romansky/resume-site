@@ -19,8 +19,34 @@
 	<input type="text" id="enddate" formControlName="enddate">
 	<label for="content">Content</label>
 	<input type="text" id="content" formControlName="content">
-	<button type="submit" [disabled]="!form.valid">Submit</button>
+	<button type="submit" [disabled]="!form.valid">{{edit == false ? "Submit" : "Update"}}</button>
 
 	<br/><br/>
 	Value: {{ form.value | json }}
 </form>
+
+<ng-container *ngIf="!jobs.length && !edus.length; else items">
+	<p>This is where resume items will go as I finish setting up a live production database</p>
+</ng-container>
+<ng-template #items>
+	<div *ngIf="jobs.length">
+		<p>Work History</p>
+		<ul>
+			<li *ngFor="let job of jobs">
+				<app-item [item]="job"></app-item>
+				<button (click)="onEdit(job)">Edit</button>
+				<button (click)="onDelete(job)">Delete</button>
+			</li>
+		</ul>
+	</div>
+	<div *ngIf="edus.length">
+		<p>Education</p>
+		<ul>
+			<li *ngFor="let edu of edus">
+				<app-item [item]="edu"></app-item>
+				<button (click)="onEdit(edu)">Edit</button>
+				<button (click)="onDelete(edu)">Delete</button>
+			</li>
+		</ul>
+	</div>
+</ng-template>

@@ -1,1 +1,8 @@
 /usr/lib/python3/dist-packages/supervisor/options.py:474: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+
+restructure adding, editing, and deleting entries
+-use an edit button to fill in the form with existing entry data
+--and change the add button to an update button
+-otherwise the form is blank and used for adding data
+
+switch over to uuids for item id values
