@@ -11,7 +11,7 @@ export class ResItService {
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-	private uri = 'api/resume';//change to CockroachDB uri when ready for Prod
+	private uri = 'api/resume/';//change to CockroachDB uri when ready for Prod
 
 	constructor(private http: HttpClient) { }
 
@@ -20,15 +20,17 @@ export class ResItService {
 				catchError(this.handleError<ResIt[]>('get ResIts', [])));
 	}
 	getItem(id: string): Observable<ResIt> {
-		const url = `${this.uri}/${id}`;
+		const url = `${this.uri}${id}`;
 		return this.http.get<ResIt>(url).pipe(
 				catchError(this.handleError<ResIt>('get ResIt')));
 	}
 	updateItem(resIt: ResIt): Observable<any> {
-		return this.http.put(this.uri, resIt, this.httpOptions).pipe(
+		return this.http.put(`${this.uri}${resIt.id}`, resIt, this.httpOptions).pipe(
 				catchError(this.handleError<any>('update ResIt')));
 	}
 	addItem(resIt: ResIt): Observable<ResIt> {
+		console.log("add");
+		console.log(resIt);
 		return this.http.post<ResIt>(this.uri, resIt, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('add ResIt')));
 	}

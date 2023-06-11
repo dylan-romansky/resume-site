@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ResItService } from '../res-it.service';
 
 @Component({
   selector: 'app-entry',
@@ -10,7 +12,7 @@ export class EntryComponent {
 	form: any;
 	isJob: boolean = false;
 
-	constructor(private fb: FormBuilder) {}
+	constructor(private fb: FormBuilder, private resItService: ResItService, private router: Router) {}
 
 	ngOnInit(): void {
 		this.form = this.fb.group({
@@ -26,6 +28,8 @@ export class EntryComponent {
 
 	onSubmit() {
 		console.log(this.form);
+		this.resItService.addItem(this.form);
+		this.router.navigate(['/resume']);
 	}
 
 	selectType(event: any) {
