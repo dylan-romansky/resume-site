@@ -1,4 +1,5 @@
-flask==2.2.3
-sqlalchemy-cockroachdb==2.0.0
-psycopg2==2.9.5
-uwsgi==2.0.21
+asposestorage==1.0.2
+Flask==2.3.2
+SQLAlchemy==2.0.16
+SQLAlchemy==1.4.44
+sqlalchemy_cockroachdb==2.0.1

@@ -15,3 +15,12 @@ class res_it(Base):
 	enddate = Column(String)
 	content = Column(String)
 	type = Column(String)
+
+	def update_fields(self, item):
+		self.id = item.id
+		self.name = item.name
+		self.title = item.title
+		self.startdate = item.startdate
+		self.enddate = item.enddate
+		self.content = item.content
+		self.type = item.type

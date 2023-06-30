@@ -4,9 +4,17 @@ items is stored in a CockroachDB cluster.
 Then it was containerized and made deployable using Docker
 and Kubernetes
 
+Then a barebones frontend was made in Angular
 
 
-Soon the frontend will be redone in Angular
+Currently backend is being converted from a purely flask
+application to purely an api that the Angular frontend
+is capable of interacting with
+
+Then once that's in place, the frontend can be made much
+more functional and much more visually appealing
+
+Then I will reimplement the Docker/Kubernetes deployments
 
 After that a Terraform configuration will be made
 

@@ -6,3 +6,5 @@ restructure adding, editing, and deleting entries
 -otherwise the form is blank and used for adding data
 
 switch over to uuids for item id values
+
+see if there's a way to simplify the flask backend

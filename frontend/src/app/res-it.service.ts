@@ -34,7 +34,7 @@ export class ResItService {
 		return this.http.post<ResIt>(this.uri, resIt, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('add ResIt')));
 	}
-	deleteItem(id: number): Observable<ResIt> {
+	deleteItem(id: string): Observable<ResIt> {
 		const url = `${this.uri}${id}`;
 		return this.http.delete<ResIt>(url, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('delete ResIt')));

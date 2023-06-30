@@ -21,7 +21,7 @@ export class EntryComponent {
 	ngOnInit(): void {
 		this.form = this.fb.group({
 			name: ["", Validators.required],
-			id: [0],
+			id: [""],
 			type: ["", Validators.required],
 			title: [""],
 			startdate: ["", Validators.required],
