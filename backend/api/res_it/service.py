@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+from .model import res_it as model
 from .schema import res_itSchema
 from ..db import Database
 from ..db.crdb import CrDB
+from flask import json
 
 #TODO: adapt the crdb adapter to return values consistent with the methods in this service, adapt the methods in this service to send arguments consistent with the adapter methods?
 
@@ -32,8 +34,5 @@ class Service(object):
 		records_affected = self.db.delete({'id': res_id})
 		return records_affected > 0
 
-#ok no this is horribly wrong, I will want the id in the returned item
 	def dump(self, data):
 		return res_itSchema().dump(data)
-
-#delete

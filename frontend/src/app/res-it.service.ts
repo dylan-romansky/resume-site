@@ -11,7 +11,7 @@ export class ResItService {
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-	private uri = 'api/resume/';//change to CockroachDB uri when ready for Prod
+	private uri = 'http://localhost:5000/resume-item/';
 
 	constructor(private http: HttpClient) { }
 
@@ -19,7 +19,7 @@ export class ResItService {
 		return this.http.get<ResIt[]>(this.uri).pipe(
 				catchError(this.handleError<ResIt[]>('get ResIts', [])));
 	}
-	getItem(id: string): Observable<ResIt> {
+	getItem(id: number): Observable<ResIt> {
 		const url = `${this.uri}${id}`;
 		return this.http.get<ResIt>(url).pipe(
 				catchError(this.handleError<ResIt>('get ResIt')));
@@ -34,7 +34,7 @@ export class ResItService {
 		return this.http.post<ResIt>(this.uri, resIt, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('add ResIt')));
 	}
-	deleteItem(id: string): Observable<ResIt> {
+	deleteItem(id: number): Observable<ResIt> {
 		const url = `${this.uri}${id}`;
 		return this.http.delete<ResIt>(url, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('delete ResIt')));
