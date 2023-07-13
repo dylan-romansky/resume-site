@@ -24,11 +24,13 @@ def items():
 		case 'GET':
 			return service.find_all_its()
 
-@app.route('/resume-item/<int:res_id>/', methods=['PATCH', 'GET', 'DELETE'])
+@app.route('/resume-item/<int:res_id>/', methods=['PATCH', 'PUT', 'GET', 'DELETE'])
 def item(res_id):
 	match request.method:
 		case 'PATCH':
-			return service.update_it(res_id, model.from_json(request.json))
+			return service.update_it(res_id, model.from_json(request))
+		case 'PUT':
+			return service.update_it(res_id, model.from_json(request))
 		case 'GET':
 			return service.find_it(res_id)
 		case 'DELETE':
