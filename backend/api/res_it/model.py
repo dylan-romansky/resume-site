@@ -8,7 +8,8 @@ Base = declarative_base()
 
 class res_it(Base):
 	__tablename__='res_it'
-	id = Column(Integer, primary_key=True, autoincrement='auto', unique=True)
+	id = Column(Integer, primary_key=True)
+	#id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
 	name = Column(String)
 	title = Column(String)
 	startdate = Column(String)

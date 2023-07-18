@@ -9,7 +9,7 @@ class res_itSchema(SQLAlchemyAutoSchema):
 		model = res_it
 		include_relationships = True
 		load_instance = True
-		unknown = EXCLUDE
+		#unknown = EXCLUDE
 
 #	@post_load
 #	def make_instance(self, data, **kwargs):
