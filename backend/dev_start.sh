@@ -6,13 +6,16 @@
 #same terminal
 
 _term() {
-	kill -TERM "$CHILD" 2>/dev/null
-	kill -TERM "$PARENT" 2>/dev/null
+	kill -TERM "$DB_PID" 2>/dev/null
+	kill -TERM "$FLASK_PID" 2>/dev/null
 }
 
 rm -rf cockroach-data
-cockroach start-single-node --advertise-addr 'localhost' --insecure #&
-#CHILD=$!
-#./resume.py &
-#PARENT=$!
-#wait "$PARENT"
+cockroach start-single-node --advertise-addr 'localhost' --insecure &
+DB_PID=$!
+./resume.py &
+FLASK_PID=$!
+echo $DB_PID
+echo $FLASK_PID
+wait $FLASK_PID
+_term
