@@ -1,9 +1,6 @@
 #!/bin/bash
 
-#TODO: figure out how to keep track of child pids
-#so that I can background the Cockroach instance,
-#start the Flask instance, and kill both from the
-#same terminal
+#TODO: figure out how to wait for cockroachdb to start
 
 _term() {
 	kill -TERM "$DB_PID" 2>/dev/null
@@ -13,7 +10,7 @@ _term() {
 rm -rf cockroach-data
 cockroach start-single-node --advertise-addr 'localhost' --insecure &
 DB_PID=$!
-./resume.py &
+./bin/python ./resume.py &
 FLASK_PID=$!
 echo $DB_PID
 echo $FLASK_PID
