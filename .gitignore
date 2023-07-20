@@ -1,7 +1,6 @@
 tags*
 **/__pycache__
 setup
-db
 old_cfg
 *.cfg
 secrets
