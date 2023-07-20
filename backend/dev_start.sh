@@ -10,9 +10,7 @@ _term() {
 rm -rf cockroach-data
 cockroach start-single-node --advertise-addr 'localhost' --insecure &
 DB_PID=$!
-./bin/python ./resume.py &
-FLASK_PID=$!
 echo $DB_PID
-echo $FLASK_PID
-wait $FLASK_PID
+sleep 5
+./bin/python ./resume.py
 _term
