@@ -9,9 +9,15 @@ from flask_cors import CORS
 
 app = Flask(__name__.split('.')[0])
 app.config.from_pyfile('dev.resume.cfg')
-service = res_it(uri=app
+service = None
+while not service:
+	try:
+		service = res_it(uri=app
 				.config['SQL_ALCHEMY_DATABASE_URI']
 				.replace('postgresql://', 'cockroachdb://'))
+	except:
+		#add a wait here to avoid excessive requests
+		continue
 ma = Marshmallow(app)
 schema = res_itSchema()
 CORS(app)

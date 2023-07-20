@@ -8,9 +8,8 @@ _term() {
 }
 
 rm -rf cockroach-data
-cockroach start-single-node --advertise-addr 'localhost' --insecure &
+cockroach start-single-node --advertise-addr 'localhost' --insecure > /dev/null 2>&1 &
 DB_PID=$!
-echo $DB_PID
 sleep 5
 ./bin/python ./resume.py
 _term
