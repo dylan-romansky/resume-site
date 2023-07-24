@@ -27,11 +27,11 @@ class Service(object):
 		return self.dump(it.data)
 
 	def update_it(self, res_id, it):
-		records_affected = self.db.update({'id': res_id}, it)
+		records_affected = self.db.update(res_id, it)
 		return records_affected > 0
 
 	def delete_it(self, res_id):
-		records_affected = self.db.delete({'id': res_id})
+		records_affected = self.db.delete(res_id)
 		return records_affected > 0
 
 	def dump(self, data):

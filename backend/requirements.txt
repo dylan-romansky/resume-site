@@ -6,3 +6,4 @@ marshmallow_sqlalchemy==0.29.0
 SQLAlchemy==1.4.44
 sqlalchemy_cockroachdb==2.0.1
 psycopg2==2.9.6
+Flask-UUID==0.2

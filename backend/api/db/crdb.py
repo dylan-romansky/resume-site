@@ -46,7 +46,8 @@ class CrDB(object):
 
 	def update(self, selector, item):
 		sess = sessionmaker(bind=self.db)()
-		it = res_itSchema(exclude=['id']).load(json.loads(item.data), session=sess)
+		#it = res_itSchema(exclude=['id']).load(json.loads(item.data), session=sess)
+		it = res_itSchema().load(json.loads(item.data), session=sess)
 		sess.commit()
 		run_transaction(sess,
 				lambda session:

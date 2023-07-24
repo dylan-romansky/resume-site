@@ -19,7 +19,7 @@ export class ResItService {
 		return this.http.get<ResIt[]>(this.uri).pipe(
 				catchError(this.handleError<ResIt[]>('get ResIts', [])));
 	}
-	getItem(id: number): Observable<ResIt> {
+	getItem(id: string): Observable<ResIt> {
 		const url = `${this.uri}${id}`;
 		return this.http.get<ResIt>(url).pipe(
 				catchError(this.handleError<ResIt>('get ResIt')));
@@ -34,7 +34,7 @@ export class ResItService {
 		return this.http.post<ResIt>(this.uri, resIt, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('add ResIt')));
 	}
-	deleteItem(id: number): Observable<ResIt> {
+	deleteItem(id: string): Observable<ResIt> {
 		const url = `${this.uri}${id}`;
 		return this.http.delete<ResIt>(url, this.httpOptions).pipe(
 				catchError(this.handleError<ResIt>('delete ResIt')));

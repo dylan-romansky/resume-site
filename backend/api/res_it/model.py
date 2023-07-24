@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
 from sqlalchemy import Column, String, Integer
-#from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base
+import uuid
 
 Base = declarative_base()
 
 class res_it(Base):
 	__tablename__='res_it'
-	id = Column(Integer, primary_key=True)
+	id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
 	#id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
 	name = Column(String)
 	title = Column(String)
