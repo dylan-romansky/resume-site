@@ -1,5 +1,3 @@
 /usr/lib/python3/dist-packages/supervisor/options.py:474: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
 
-switch over to uuids for item id values
-
-figure out how to configure Cockroach clusters (or just give up on making Integer values work)
+figure out how to properly separate NGINX from the flask container while still maintaining a production level WSGI server for flask to run on
