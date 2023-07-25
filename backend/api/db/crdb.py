@@ -54,6 +54,7 @@ class CrDB(object):
 					session.query(res_it)
 					.filter(res_it.id == selector)
 					.one().update_fields(it))
+		return item
 
 	def delete(self, selector):
 		run_transaction(sessionmaker(bind=self.db),
@@ -61,3 +62,4 @@ class CrDB(object):
 					session.query(res_it)
 					.filter(res_it.id == selector)
 					.delete())
+		return '' #find a way for a 204 response code. possibly defined at the endpoints

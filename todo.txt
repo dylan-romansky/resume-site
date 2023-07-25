@@ -3,5 +3,3 @@
 figure out how to properly separate NGINX from the flask container while still maintaining a production level WSGI server for flask to run on
 
 use Swagger to generate documentation
-
-create more RESTful api responses
