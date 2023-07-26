@@ -12,4 +12,5 @@ cockroach start-single-node --advertise-addr 'localhost' --insecure > /dev/null 
 DB_PID=$!
 sleep 5
 ./.env/bin/python ./resume.py
+#./.env/bin/gunicorn --bind 0.0.0.0:5000 resume:app
 _term

@@ -7,3 +7,4 @@ SQLAlchemy==1.4.44
 sqlalchemy_cockroachdb==2.0.1
 psycopg2==2.9.6
 Flask-UUID==0.2
+gunicorn==21.2.0

@@ -32,7 +32,7 @@ class Service(object):
 
 	def delete_it(self, res_id):
 		self.db.delete(res_id)
-		return '', 204
+		return '', 204 #problematic in a HATEOAS environment
 
 	def dump(self, data):
 		return res_itSchema().dump(data)

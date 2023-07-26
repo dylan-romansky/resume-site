@@ -10,7 +10,10 @@ from flask_cors import CORS
 from flask_uuid import FlaskUUID
 
 app = Flask(__name__.split('.')[0])
-app.config.from_pyfile('dev.resume.cfg')
+if __name__ == "__main__":
+	app.config.from_pyfile('dev.resume.cfg')
+else:
+	app.config.from_pyfile('resume.cfg')
 FlaskUUID(app)
 service = None
 while not service:
@@ -51,6 +54,9 @@ def handle_preflight():
 		res = Response()
 		res.headers['X-Content-Type-Options'] = '*'
 		return res
+
+def resume_api():
+	app.run(host="0.0.0.0", port=5000)
 
 if __name__ == '__main__':
 	app.run(debug=True)

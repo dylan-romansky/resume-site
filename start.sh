@@ -5,7 +5,7 @@
 # process every time
 
 SECRETS='backend/secrets'
-minikube delete
+minikube delete --all
 minikube start
 minikube addons enable ingress
 
@@ -29,9 +29,9 @@ while [ -z "$(kubectl get pods | grep Running)" ]; do
 	sleep 1
 done
 
-DB_INIT="$(cat db_init/schema.sql)"
+#DB_INIT="$(cat db_init/schema.sql)"
 kubectl exec cockroachdb-0  -- /cockroach/cockroach init --certs-dir='/cockroach/cockroach-certs'
-kubectl exec cockroachdb-0  -- /cockroach/cockroach sql --certs-dir='/cockroach/cockroach-certs' -e "$DB_INIT"
+#kubectl exec cockroachdb-0  -- /cockroach/cockroach sql --certs-dir='/cockroach/cockroach-certs' -e "$DB_INIT"
 
 kubectl apply -f yaml/resume.yaml
 
