@@ -5,3 +5,5 @@ figure out how to properly separate NGINX from the flask container while still m
 use Swagger to generate documentation
 
 clear entry form on submit
+
+Angular frontend to kubernetes cluster gives a "connection refused"
