@@ -20,6 +20,7 @@ docker rmi -f "$(docker image ls | grep resume | cut -d: -f2)"
 docker build --no-cache -t resume-backend .
 cd ../frontend
 docker build --no-cache -t resume-frontend .
+cd ..
 
 kubectl create secret generic cockroachdb.client.root --from-file="$SECRETS"/certs/
 kubectl create secret generic cockroachdb.node --from-file="$SECRETS"/certs
