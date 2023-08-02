@@ -10,4 +10,4 @@
 # a known-good frontend instance running on my
 # local machine
 
-kubectl port-forward service/resume-service 5000:5000
+kubectl port-forward service/frontend-service 5000:5000
