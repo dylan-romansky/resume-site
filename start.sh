@@ -17,8 +17,9 @@ echo "generating new certs"
 ./gen_certs.sh
 cd backend
 docker rmi -f "$(docker image ls | grep resume | cut -d: -f2)"
-docker build --no-cache -t resume .
-cd ..
+docker build --no-cache -t resume-backend .
+cd ../frontend
+docker build --no-cache -t resume-frontend .
 
 kubectl create secret generic cockroachdb.client.root --from-file="$SECRETS"/certs/
 kubectl create secret generic cockroachdb.node --from-file="$SECRETS"/certs
