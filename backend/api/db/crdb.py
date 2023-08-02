@@ -17,6 +17,7 @@ class CrDB(object):
 		#I have no clue if the below will work
 		if not self.db:
 			raise ValueError("CrDB failed to create engine")
+		#determine how to check if table exists
 		Base.metadata.create_all(self.db)
 		self.session = sessionmaker(bind=self.db)
 

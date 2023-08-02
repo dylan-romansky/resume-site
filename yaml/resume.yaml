@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: resume-backend
+        tier: backend
     spec:
       containers:
       - name: resume-backend
@@ -26,12 +27,12 @@ kind: Service
 metadata:
   name: resume-service
 spec:
-#  type: NodePort
-  type: LoadBalancer #Not on Minikube?
+  type: NodePort
+#  type: LoadBalancer #Not on Minikube?
   selector:
     app: resume-backend
   ports:
   - protocol: TCP
-    nodePort: 30080
-    port: 5000
-    targetPort: 5000
+    nodePort: 30080 #exposes outside cluster
+    port: 5000 #exposes within cluster
+    targetPort: 5000 #sends requests to this port

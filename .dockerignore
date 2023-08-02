@@ -4,3 +4,4 @@ setup
 tags
 __pycache__
 old_cfg
+cockroach-data

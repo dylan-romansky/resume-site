@@ -12,8 +12,7 @@ export class ResItService {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
 	private uri = 'http://localhost:5000/resume-item/';
-	//private uri = 'http://0.0.0.0:5000/resume-item/';
-	//private uri = 'http://192.168.49.2:30080'
+	//private uri = 'http://resume-service:30080'
 
 	constructor(private http: HttpClient) { }
 

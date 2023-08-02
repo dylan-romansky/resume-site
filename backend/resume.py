@@ -8,21 +8,23 @@ from api.res_it.model import res_it as model
 from api.res_it.schema import res_itSchema
 from flask_cors import CORS
 from flask_uuid import FlaskUUID
+from time import sleep as sleep
 
 app = Flask(__name__.split('.')[0])
 if __name__ == "__main__":
 	app.config.from_pyfile('dev.resume.cfg')
 else:
-	app.config.from_pyfile('resume.cfg')
+	app.config.from_pyfile('prod.resume.cfg')
 FlaskUUID(app)
 service = None
 while not service:
+	print("heeheehee hoohoohoo")
 	try:
 		service = res_it(uri=app
 				.config['SQL_ALCHEMY_DATABASE_URI']
 				.replace('postgresql://', 'cockroachdb://'))
 	except:
-		#add a wait here to avoid excessive requests
+		sleep(1)
 		continue
 ma = Marshmallow(app)
 schema = res_itSchema()
@@ -56,7 +58,7 @@ def handle_preflight():
 		return res
 
 def resume_api():
-	app.run(host="0.0.0.0", port=5000)
+	app.run()
 
 if __name__ == '__main__':
 	app.run(debug=True)

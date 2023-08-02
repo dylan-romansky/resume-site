@@ -6,12 +6,10 @@ Develop frontend in Angular instead of using Flask for everything
 --sqlalchemy supports this
 -Use route guards to protect admin panel
 
-Switch to pipenv for dependency management
--https://pipenv.pypa.io/en/latest/
-
 Automate cockroachdb initialization
 -Check how cockroach uses the --join flag
--See if sqlalchemy can handle table creation as needed
+-check from the Flask app if the table exists
+--Flask is able to initialize the db
 --https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_core_creating_table.htm
 -https://auth0.com/blog/sqlalchemy-orm-tutorial-for-python-developers/
 
@@ -44,9 +42,6 @@ possible misc links:
 https://pythonhosted.org/Flask-Mail/
 
 https://flask-login.readthedocs.io/en/latest/
-
-Rework file structure
--split classes, config, backend into their own files
 
 Make the Dockerfile not hideous
 

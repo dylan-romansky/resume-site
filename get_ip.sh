@@ -1,6 +1,13 @@
 #!/bin/bash
 
-# The command to get the ip address that minikube
-# exposed for outside traffic
+# The following command no longer works properly,
+# however I have kept it here for my notes
+#minikube service resume-service --url
 
-minikube service resume-service --url
+# This command exposes the backend service to my
+# local machine. This way I can test and verify
+# the backend's behaviour in the cluster using
+# a known-good frontend instance running on my
+# local machine
+
+kubectl port-forward service/resume-service 5000:5000
