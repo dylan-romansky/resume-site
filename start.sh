@@ -36,6 +36,7 @@ done
 kubectl exec cockroachdb-0  -- /cockroach/cockroach init --certs-dir='/cockroach/cockroach-certs'
 #kubectl exec cockroachdb-0  -- /cockroach/cockroach sql --certs-dir='/cockroach/cockroach-certs' -e "$DB_INIT"
 
-kubectl apply -f yaml/resume.yaml
+kubectl apply -f yaml/backend.yaml
+kubectl apply -f yaml/frontend.yaml
 
 minikube tunnel
