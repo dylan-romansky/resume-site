@@ -36,12 +36,17 @@ spec:
     port: 5000 #exposes within cluster
     targetPort: 5000 #sends requests to this port
 ---
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: resume-frontend
   labels:
     app: resume-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume-frontend
   template:
     metadata:
       labels:
