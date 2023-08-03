@@ -10,7 +10,8 @@ minikube start
 minikube addons enable ingress
 
 eval $(minikube -p minikube docker-env)
-
+echo "cleaning up docker environment"
+docker system prune --force
 echo "removing old certs"
 rm -rf $SECRETS
 echo "generating new certs"
