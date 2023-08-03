@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resume-frontend
+  labels:
+    app: resume-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resume-frontend
+  template:
+    metadata:
+      labels:
+        app: resume-frontend
+    spec:
+      containers:
+      - name: resume-frontend
+        image: resume-frontend
+        imagePullPolicy: IfNotPresent #change to Always when online
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: NodePort #switch to LoadBalancer online so nodePort can be 8080
+  selector:
+    app: resume-frontend
+  ports:
+  - protocol: TCP
+    nodePort: 30080
+    port: 80
+    targetPort: 80
