@@ -7,3 +7,5 @@ use Swagger to generate documentation
 clear entry form on submit
 
 Angular frontend to kubernetes cluster gives a "connection refused"
+
+FOR THE LOVE OF GOD PLEASE FIND AN ALTERNATIVE TO MINIKUBE
