@@ -11,6 +11,7 @@ from flask_uuid import FlaskUUID
 from time import sleep as sleep
 
 app = Flask(__name__.split('.')[0])
+app.url_map.strict_slashes = False
 if __name__ == "__main__":
 	app.config.from_pyfile('dev.resume.cfg')
 else:
@@ -52,8 +53,9 @@ def item(res_id):
 
 @app.before_request
 def handle_preflight():
-	if request.method == "OPTIONS":
+	if request.method == 'OPTIONS':
 		res = Response()
+		res.headers.add('Access-Control-Allow-Origin', '*')
 		res.headers['X-Content-Type-Options'] = '*'
 		return res
 

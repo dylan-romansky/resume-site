@@ -16,7 +16,7 @@ RUN npm run build --prod
 #EXPOSE 4200
 #CMD ["npm", "start"]
 
-FROM  nginx:alpine
+FROM  nginx
 COPY --from=node /app/dist/resume-site /opt/resume-site
 COPY default.conf /etc/nginx/conf.d/default.conf
 
