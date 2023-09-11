@@ -19,7 +19,7 @@ else:
 FlaskUUID(app)
 service = None
 while not service:
-	print("heeheehee hoohoohoo")
+	print("waiting for service")
 	try:
 		service = res_it(uri=app
 				.config['SQL_ALCHEMY_DATABASE_URI']
@@ -54,8 +54,15 @@ def item(res_id):
 @app.before_request
 def handle_preflight():
 	if request.method == 'OPTIONS':
+		print("LICK MY BALLS STEVE JOBS")
 		res = Response()
 		res.headers.add('Access-Control-Allow-Origin', '*')
+		#Pretty sure CORS is supposed to be handling
+		#This but it's not so I've gotta do this
+		#All manually for now
+		if __name__ == '__main__':
+			res.headers.add('Access-Control-Allow-Headers', '*')
+			res.headers.add('Access-Control-Allow-Methods', 'POST, GET, PATCH, PUT, DELETE, OPTIONS')
 		res.headers['X-Content-Type-Options'] = '*'
 		return res
 

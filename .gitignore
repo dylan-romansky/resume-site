@@ -11,3 +11,5 @@ serv_config_old
 supervisord.pid
 supervisord.log
 docker-compose.yml
+node_modules
+package*

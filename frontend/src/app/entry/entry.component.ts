@@ -16,6 +16,8 @@ export class EntryComponent {
 	jobs: ResIt[] = [];
 	edus: ResIt[] = [];
 
+	private date_pattern: RegExp = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
+
 	constructor(private fb: FormBuilder, private resItService: ResItService, private router: Router) {}
 
 	ngOnInit(): void {
@@ -24,8 +26,8 @@ export class EntryComponent {
 			id: [""],
 			type: ["", Validators.required],
 			title: [""],
-			startdate: ["", Validators.required],
-			enddate: [""],
+			startdate: ["", [Validators.required, Validators.pattern(this.date_pattern)]],
+			enddate: ["", Validators.pattern(this.date_pattern)],
 			content: ["", Validators.required]
 		});
 		this.form.valueChanges.subscribe(console.log);

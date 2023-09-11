@@ -9,10 +9,7 @@ kubectl delete deployment resume-frontend
 kubectl delete deployment resume-backend
 kubectl delete service frontend-service
 kubectl delete service backend-service
-cd backend
-docker build --no-cache -t resume-backend .
-cd ../frontend
-docker build --no-cache -t resume-frontend .
-cd ..
+docker build --no-cache -t resume-backend ./backend/
+docker build --no-cache -t resume-frontend ./frontend/
 kubectl apply -f yaml/backend.yaml
 kubectl apply -f yaml/frontend.yaml

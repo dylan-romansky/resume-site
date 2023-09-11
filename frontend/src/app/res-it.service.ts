@@ -11,8 +11,16 @@ export class ResItService {
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-	//private uri = 'http://localhost:5000/resume-item/';
-	private uri = '/resume-item/'
+	//maybe instead of manually uncommenting, I
+	//can make the scripts responsible for running
+	//either a local dev deployment or a k8s
+	//cluster deployment sed replace the uri with
+	//the expected one
+
+	//unless angular has conditional logic for
+	//variables depending on if this is a dev or
+	//prod environment
+	private uri = 'http://localhost:5000/resume-item/'
 
 	constructor(private http: HttpClient) { }
 

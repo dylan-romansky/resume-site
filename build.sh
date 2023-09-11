@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# This script serves as a means of deploying and initializing
-# the entire application so I don't have to go through this
-# process every time
+# This script serves as a means of modifying any
+# applicable URIs, deploying, and initializing the
+# entire application on a k8s cluster so I don't
+# have to go through this process every time I
+# want to test changes made while running directly
+# on my local machine
+
+./switch-uri.sh k8s-dev
+if [ $? -ne 0 ]; then
+	exit
+fi
 
 SECRETS='backend/secrets'
 minikube delete --all
@@ -16,12 +24,9 @@ echo "removing old certs"
 rm -rf $SECRETS
 echo "generating new certs"
 ./gen_certs.sh
-cd backend
 docker rmi -f "$(docker image ls | grep resume | cut -d: -f2)"
-docker build --no-cache -t resume-backend .
-cd ../frontend
-docker build --no-cache -t resume-frontend .
-cd ..
+docker build --no-cache -t resume-backend ./backend/
+docker build --no-cache -t resume-frontend ./frontend/
 
 kubectl create secret generic cockroachdb.client.root --from-file="$SECRETS"/certs/
 kubectl create secret generic cockroachdb.node --from-file="$SECRETS"/certs

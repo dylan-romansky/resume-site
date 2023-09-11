@@ -8,7 +8,7 @@ _term() {
 }
 
 rm -rf cockroach-data
-cockroach start-single-node --advertise-addr 'localhost' --insecure > /dev/null 2>&1 &
+cockroach start-single-node --advertise-addr 'localhost' --http-addr "$(cat /etc/hostname):30080" --insecure > /dev/null 2>&1 &
 DB_PID=$!
 sleep 5
 ./.env/bin/python ./resume.py
