@@ -1,9 +1,10 @@
 #!/bin/bash
 
-./switch-uri.sh "k8s-dev"
+./switch-uri.sh "k8s"
 if [ $? -ne 0 ]; then
 	exit
 fi
+
 minikube stop
 minikube start
 eval $(minikube -p minikube docker-env)

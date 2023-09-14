@@ -7,7 +7,7 @@
 # want to test changes made while running directly
 # on my local machine
 
-./switch-uri.sh k8s-dev
+./switch-uri.sh k8s
 if [ $? -ne 0 ]; then
 	exit
 fi

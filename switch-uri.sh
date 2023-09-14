@@ -11,11 +11,11 @@ case "$1" in
 		RES_REPLACE="$VAR_RES $LOC$URI_RES"
 		FLAG="-z"
 		;;
-	k8s-dev)
+	k8s)
 		RES_REPLACE="$VAR_RES \'$URI_RES"
 		FLAG="-n"
 		;;
-	k8s)
+	prod)
 		echo "cloud based k8s functionality not implemented yet. exiting"
 		exit
 		;;
