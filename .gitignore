@@ -13,3 +13,4 @@ supervisord.log
 docker-compose.yml
 node_modules
 package*
+resume.json
